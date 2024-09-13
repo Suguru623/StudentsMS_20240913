@@ -1,0 +1,101 @@
+﻿@model StudentsMS.ViewModels.VMStudent
+
+@{
+    ViewData["Title"] = "學生基本資料";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+<div class="row">
+
+    <div class="col-3">
+        <h2 class="text-center">科系</h2>
+        <div class="list-group">
+            @foreach (var item in Model.Department)
+            {
+                <a asp-action="Index" class="list-group-item list-group-item-action text-center" asp-route-DeptID="@item.DeptID">@item.DName</a>
+
+                <br />
+            }
+        </div>
+    </div>
+
+    <div class="col-9">
+        <h2 class="text-center">
+            目前為 @ViewData["DepartmentName"]的科系
+        </h2>
+        <p>
+            <a asp-action="Create" asp-route-DeptID="@ViewData["DepartmentID"]" class="text-end btn btn-primary btn-lg">建立學生基本資料</a>
+        </p>
+        @if (Model.Student.Count()==0)
+        {
+            <h2 class="text text-center text-danger">目前尚無任何學生資料</h2>
+        }
+        else
+        {   
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().StuID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().SName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().Grade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().Class)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().Number)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.FirstOrDefault().Dept)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Student)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StuID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Class)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dept.DeptID)
+                        </td>
+                            <td class="d-flex">
+                            <a asp-action="Edit" asp-route-id="@item.StuID" class="btn btn-primary">編輯</a> |
+                            <a asp-action="Details" asp-route-id="@item.StuID" class="btn btn-success">詳細資料</a> |
+                            @* <form asp-action="Delete" asp-route-id="@item.StuID" class="btn btn-danger">刪除</form> *@
+                                <form asp-action="Delete">
+                                    <input type="hidden" value="@item.StuID" name="id" />
+                                    <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('你確定要刪除 @item.SName 這筆資料?')" />
+                                </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+
+</div>
+
+

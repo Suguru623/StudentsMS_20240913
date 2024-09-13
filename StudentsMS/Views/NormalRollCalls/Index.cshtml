@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StudentsMS.Models.RollCall>
+
+@{
+    ViewData["Title"] = "點名紀錄";
+    Layout = "_LayoutNS";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+@* <p class="text-end">
+    <a asp-action="Create" class="btn btn-primary">點名</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RCDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RCDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dept.DName)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CT.CTID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stu.StuID)
+            </td>
+            <td>
+               @*  @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<StudentsMS.Models.LeaveDetail>
+
+@{
+    ViewData["Title"] = "請假明細清單";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="searchString" type="search" placeholder="輸入學號尋找..." aria-label="Search" value="@ViewData["CurrentFilter"]">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<p class="text-end">
+    
+    <a asp-action="Create" class="btn btn-primary">新增請假紀錄</a>
+</p>
+@if (ViewData["Message"] != null)
+{
+    <h2 class="text-center text-danger">@ViewData["Message"]</h2>
+}
+else if (!Model.Any())
+{
+     <h2 class="text text-center text-danger">目前此學生尚無任何請假資料</h2>
+} 
+else
+{   
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LDID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leave)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LDDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>      
+            <th>
+               
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LDID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stu.StuID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Leave.LName)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LDDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>   
+            <td class="d-flex justify-content-end">
+                    <a asp-action="Edit" asp-route-id="@item.LDID" class="btn btn-primary">編輯</a> |
+                    <a asp-action="Details" asp-route-id="@item.LDID" class="btn btn-success">詳細資料</a> |
+                    @* <a asp-action="Delete" asp-route-id="@item.LDID" class="btn btn-danger">刪除</a> *@
+                    <form asp-action="Delete">
+                        <input type="hidden" value="@item.LDID" name="id" />
+                        <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('你確定要刪除 @item.LDID|@item.StuID|@item.Leave.LName|@item.LDDate 這筆資料?')" />
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}

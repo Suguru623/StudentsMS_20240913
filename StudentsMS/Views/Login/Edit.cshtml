@@ -1,0 +1,44 @@
+﻿@model StudentsMS.Models.Login
+@{
+    ViewData["Title"] = "修改密碼";
+    Layout = "_LayoutNS";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div>
+    <a asp-action="Index" asp-controller="NormalStudents"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <input type="hidden" asp-for="Account" /> *@
+            <div class="form-group">
+                <label asp-for="Account" class="control-label"></label>
+                <input asp-for="Account" class="form-control" readonly/>
+                @* <span asp-validation-for="Password" class="text-danger"></span> *@         
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="type" class="control-label"></label>
+                <input asp-for="type" class="form-control" />
+                <span asp-validation-for="type" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="確定修改" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Login">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

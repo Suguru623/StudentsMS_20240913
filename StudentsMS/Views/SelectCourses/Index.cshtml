@@ -1,0 +1,111 @@
+﻿@* @model IEnumerable<StudentsMS.Models.SelectCourse> *@
+@model StudentsMS.ViewModels.VMSelectCourse
+
+@{
+    ViewData["Title"] = "學生選課清單";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+<p class="text-end">
+    <a asp-action="Create" asp-route-DeptID="@ViewData["DepartmentID"]" class="btn btn-primary btn-lg">新增選課資料</a>
+</p>
+
+<div class="row">
+    <div class="col-2">
+        <h2 class="text-center  shadow my-3 border border-dark">科系</h2>
+        <div class="dropdown text-center">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                @ViewData["DepartmentName"]
+            </button>
+            <div class="dropdown-menu">
+            @foreach (var item in Model.Department)
+            {
+                    <a asp-action="Index" class="dropdown-item text-center" asp-route-DeptID="@item.DeptID" asp-route-CourseID="@ViewData["CourseID"]">@item.DName</a>
+
+                <br />
+            }
+            </div>
+        </div>
+        <h2 class="text-center  shadow my-3 border border-dark">課程</h2>
+        <div class="dropdown text-center">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                @ViewData["CourseName"]
+            </button>
+            <div class="dropdown-menu">
+            @foreach (var item in Model.Course)
+            {
+                        <a asp-action="Index" class="dropdown-item text-center" asp-route-CourseID="@item.CourseID" asp-route-DeptID="@ViewData["DepartmentID"]">@item.CName</a>
+
+                <br />
+            }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectCourse.FirstOrDefault().Stu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectCourse.FirstOrDefault().Stu.SName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectCourse.FirstOrDefault().Dept)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectCourse.FirstOrDefault().Course)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectCourse.FirstOrDefault().CT)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SelectCourse)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stu.StuID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stu.SName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dept.DName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.CName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CT.CTID)
+                        </td>
+                        <td class="d-flex justify-content-end">
+                            @* @Html.ActionLink("Edit", "Edit", new { StuID = item.StuID, DeptID = item.DeptID, CourseID = item.CourseID, CTID = item.CTID }) |
+                            @Html.ActionLink("Details", "Details", new { StuID = item.StuID, DeptID = item.DeptID, CourseID = item.CourseID, CTID = item.CTID }) | *@
+                            @* @Html.ActionLink("Delete", "Delete", new { StuID = item.StuID, DeptID = item.DeptID, CourseID = item.CourseID, CTID = item.CTID }) *@
+                            <form asp-action="Delete" >
+                                <input type="hidden" name="stuID" value="@item.StuID" />
+                                <input type="hidden" name="deptID" value="@item.DeptID" />
+                                <input type="hidden" name="courseID" value="@item.CourseID" />
+                                <input type="hidden" name="ctID" value="@item.CTID" />
+                                <input type="submit" value="刪除" class="btn btn-danger" 
+                                onclick="return confirm('你確定要刪除 @item.StuID|@item.DeptID|@item.CourseID|@item.CTID  這筆資料?')" />
+                            </form>
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+

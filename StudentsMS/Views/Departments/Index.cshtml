@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StudentsMS.Models.Department>
+
+@{
+    ViewData["Title"] = "科系資料管理";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-primary">新增科系</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DName)
+            </td>
+                <td class="d-flex justify-content-end">
+                    <a asp-action="Edit" asp-route-id="@item.DeptID" class="btn btn-primary">編輯</a> |
+                    <a asp-action="Details" asp-route-id="@item.DeptID" class="btn btn-success">詳細資料</a> |
+                        @* <a asp-action="Delete" asp-route-id="@item.DeptID" class="btn btn-danger">刪除</a> *@
+                    <form asp-action="Delete">
+                        <input type="hidden" value="@item.DeptID" name="id" />
+                        <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('你確定要刪除 @item.DName 這筆資料?')" />
+                    </form>
+            </td>                
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+﻿@model StudentsMS.Models.Student
+
+@{
+    ViewData["Title"] = "學生詳細資料";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Student</h4>
+    <div>
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StuID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StuID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Grade)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Grade)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Class)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dept)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dept.DName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.StuID" class="btn btn-primary">修改</a> 
+   @*  <a asp-action="Index">返回學生資料</a> *@
+</div>

@@ -1,0 +1,47 @@
+﻿@model StudentsMS.Models.SelectCourse
+
+@{
+    ViewData["Title"] = "新增開課資料";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>SelectCourse</h4>
+<div>
+    <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StuID" class="control-label"></label>
+                <select asp-for="StuID" class ="form-control" asp-items="ViewBag.StuID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseID" class="control-label"></label>
+                <select asp-for="CourseID" class ="form-control" asp-items="ViewBag.CourseID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptID" class="control-label"></label>
+                <select asp-for="DeptID" class ="form-control" asp-items="ViewBag.DeptID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CTID" class="control-label"></label>
+                <select asp-for="CTID" class ="form-control" asp-items="ViewBag.CTID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="確定新增" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

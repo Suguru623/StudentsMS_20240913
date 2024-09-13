@@ -1,0 +1,43 @@
+﻿@model StudentsMS.Models.Student
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_LayoutNS";
+}
+
+<h1 class="text-center shadow my-3 p-4"> @Html.DisplayFor(model => model.SName) 的個人資料</h1>
+<hr />
+<div class="row">
+<table class="table  table-striped-columns text-center">
+    <tbody>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.StuID)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.StuID)</td>
+            </tr>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.SName)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.SName)</td>
+        </tr>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.Grade)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.Grade)</td>
+        </tr>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.Class)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.Class)</td>
+        </tr>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.Number)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.Number)</td>
+        </tr>
+        <tr class="text-center">
+                <th class="col-sm-6 ">@Html.DisplayNameFor(model => model.Dept)</th>
+                <td class="col-sm-6 ">@Html.DisplayFor(model => model.Dept.DName)</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div>
+  @*   <a asp-action="Edit" asp-route-id="@Model?.StuID">Edit</a> |
+    <a asp-action="Index">Back to List</a> *@
+</div>

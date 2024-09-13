@@ -1,0 +1,59 @@
+﻿@model StudentsMS.Models.RollCall
+
+@{
+    ViewData["Title"] = "詳細資料";
+    Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>RollCall</h4>
+    <div>
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RCDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RCDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CT)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CT.CTID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Course.CName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dept)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dept.DName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stu.StuID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RCID" class="btn btn-primary">編輯</a>
+    @* @Html.ActionLink("Edit", "Edit", new { RCID=Model.RCID,StuID = Model.StuID, DeptID = Model.DeptID, CourseID = Model.CourseID, CTID = Model.CTID }) | *@
+    @* <a asp-action="Index">Back to List</a> *@
+</div>

@@ -1,0 +1,52 @@
+﻿@model StudentsMS.Models.LeaveDetail
+
+@{
+    ViewData["Title"] = "假單詳細資料";
+    Layout = "_LayoutNS";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    @* <h4>LeaveDetail</h4> *@
+    <div>
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LDDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LDDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Leave)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Leave.LName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stu.StuID)
+        </dd>
+    </dl>
+</div>
+<div>
+    @* <a asp-action="Edit" asp-route-id="@Model?.LDID">Edit</a> | *@
+   @*  <a asp-action="Index">Back to List</a> *@
+</div>

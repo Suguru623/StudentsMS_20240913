@@ -1,0 +1,35 @@
+﻿@model StudentsMS.Models.SelectCourse
+
+@{
+    ViewData["Title"] = "修改課程內容";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>SelectCourse</h4>
+<div>
+    <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StuID" />
+            <input type="hidden" asp-for="CourseID" />
+            <input type="hidden" asp-for="DeptID" />
+            <input type="hidden" asp-for="CTID" />
+            <div class="form-group">
+                <input type="submit" value="確定修改" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

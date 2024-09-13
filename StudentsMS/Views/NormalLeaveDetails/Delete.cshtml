@@ -1,0 +1,52 @@
+﻿@model StudentsMS.Models.LeaveDetail
+
+@{
+    ViewData["Title"] = "刪除";
+    Layout = "_LayoutNS";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>你確定要刪除嗎?</h3>
+<div>
+    <h4>LeaveDetail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LDDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LDDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Leave)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Leave.LeaveID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stu.StuID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="LDID" />
+        <input type="submit" value="確定刪除" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary">取消刪除</a>
+    </form>
+</div>

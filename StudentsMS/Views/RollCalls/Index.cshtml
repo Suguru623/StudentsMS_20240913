@@ -1,0 +1,139 @@
+﻿@* @model IEnumerable<StudentsMS.Models.RollCall> *@
+@model StudentsMS.ViewModels.VMRollCall
+
+@{
+    ViewData["Title"] = "學生點名明細";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+<p class="text-end">
+    <a asp-action="Create" asp-route-DeptID="@ViewData["DepartmentID"]" class="btn btn-primary btn-lg">新增點名資料</a>
+</p>
+
+<div class="row">
+
+    <div class="col-2">
+        <h2 class="text-center  shadow my-3 border border-dark">科系</h2>
+        <div class="dropdown text-center">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                @ViewData["DepartmentName"]
+            </button>
+            <div class="dropdown-menu">
+                @foreach (var item in Model.Department)
+                {
+                    <a asp-action="Index" class="dropdown-item text-center" asp-route-DeptID="@item.DeptID" asp-route-CourseID="@ViewData["CourseID"]">@item.DName</a>
+
+                    <br />
+                }
+            </div>
+        </div>
+        <h2 class="text-center  shadow my-3 border border-dark">課程</h2>
+        <div class="dropdown text-center">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                @ViewData["CourseName"]
+            </button>
+            <div class="dropdown-menu">
+                @foreach (var item in Model.Course)
+                {
+                    <a asp-action="Index" class="dropdown-item text-center" asp-route-CourseID="@item.CourseID" asp-route-DeptID="@ViewData["DepartmentID"]">@item.CName</a>
+
+                    <br />
+                }
+            </div>
+        </div>
+        <h2 class="text-center shadow my-3 border border-dark">日期</h2>
+        <form asp-action="Index" method="get">
+            <input type="hidden" name="deptID" value="@ViewData["DepartmentID"]" />
+            <input type="hidden" name="courseID" value="@ViewData["CourseID"]" />
+            <input type="hidden" name="stuID" value="@ViewData["StuID"]" />
+            <input type="hidden" name="ctID" value="@ViewData["CtID"]" />
+            <div class="text-center">
+                <input type="date" name="selectedDate" class="form-control" value="@ViewData["SelectedDate"]" />
+                <button type="submit" class="btn btn-primary mt-2">查看點名紀錄</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-10">
+        @if (Model.RollCall == null || !Model.RollCall.Any())
+        {
+            <h2 class="text text-center text-danger">此科系之課程目前尚無任何點名資料</h2>
+        }
+        else
+        {   
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().RCID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().Stu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().Dept)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().Course)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().CT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().RCDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RollCall.FirstOrDefault().ArrivalTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.RollCall)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RCID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stu.StuID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dept.DName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.CName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CT.CTID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RCDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArrivalTime)
+                        </td>
+                        <td class="d-flex justify-content-end">
+                           
+                            <a asp-action="Edit" asp-route-id="@item.RCID" class="btn btn-primary">編輯</a> |
+                            <a asp-action="Details" asp-route-id="@item.RCID" class="btn btn-success">詳細資料</a> |
+                            @* <a asp-action="Delete" asp-route-id="@item.RCID" class="btn btn-danger">刪除</a> *@
+                            <form asp-action="Delete">
+                                <input type="hidden" value="@item.RCID" name="id" />
+                                <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('你確定要刪除 @item.RCID|@item.StuID|@item.Course.CName|@item.Dept.DName|@item.CTID 這筆資料?')" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+
+</div>
+
+
+
+

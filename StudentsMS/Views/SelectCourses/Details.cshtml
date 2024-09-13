@@ -1,0 +1,51 @@
+﻿@model StudentsMS.Models.SelectCourse
+
+@{
+    ViewData["Title"] = "課程詳細資料";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>SelectCourse</h4>
+    <div>
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stu.StuID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stu.SName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stu.SName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dept)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dept.DName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.CName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CT)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CT.CTID)
+        </dd>   
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { StuID = Model.StuID, DeptID = Model.DeptID, CourseID = Model.CourseID, CTID = Model.CTID }) |
+    @* <a asp-action="Index">Back to List</a> *@
+</div>

@@ -1,0 +1,63 @@
+﻿@model StudentsMS.Models.RollCall
+
+@{
+    ViewData["Title"] = "點名";
+    Layout = "_LayoutNS";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>學生點名系統</h4>
+<div>
+    <a asp-action="Index"><i class="bi bi-arrow-left-circle fs-4"></i></a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StuID" class="control-label"></label>
+                <input name="StuID" id="StuID" class="form-control" Value="@ViewBag.StuID" readonly></input>
+            </div>
+           <div class="form-group">
+                <label asp-for="CourseID" class="control-label"></label>
+                <select id="CourseID" name="CourseID" class="form-control">
+                @foreach(var item in ViewBag.Result)
+                {
+                        <option value="@item.CourseID">@item.Course.CName</option>
+                }
+                </select>
+            </div>
+            @*  <div class="form-group">
+                <label asp-for="DeptID" class="control-label"></label>
+                <select asp-for="DeptID" class ="form-control" asp-items="ViewBag.DeptID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CTID" class="control-label"></label>
+                <select asp-for="CTID" class ="form-control" asp-items="ViewBag.CTID"></select>
+            </div> *@
+           @*  <div class="form-group">
+                <label asp-for="RCDate" class="control-label"></label>
+                <input asp-for="RCDate" class="form-control" />
+                <span asp-validation-for="RCDate" class="text-danger"></span>
+            </div> *@
+            @* <div class="form-group">
+                <label asp-for="ArrivalTime" class="control-label"></label>
+                <input asp-for="ArrivalTime" class="form-control" />
+                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="點名" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

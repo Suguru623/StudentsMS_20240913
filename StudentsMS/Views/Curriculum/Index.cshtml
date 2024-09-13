@@ -1,0 +1,107 @@
+﻿@* @model IEnumerable<StudentsMS.Models.Curriculum> *@
+@model StudentsMS.ViewModels.VMCurriculum
+
+@{
+    ViewData["Title"] = "開課課程清單";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-primary">新增開課課程</a>
+</p>
+
+<div class="row">
+    <div class="col-3">
+        <h2 class="text-center">科系</h2>
+        <div class="list-group">
+            @foreach (var item in Model.Department)
+            {
+                <a asp-action="Index" class="list-group-item list-group-item-action text-center" asp-route-DeptID="@item.DeptID">@item.DName</a>
+
+                <br />
+            }
+        </div>
+    </div>
+
+
+    <div class="col-9">
+        <h2 class="text-center">
+            目前為 @ViewData["DepartmentName"]的課程
+        </h2>
+       @*  <p>
+            <a asp-action="Create" asp-route-DeptID="@ViewData["DepartmentID"]" class="text-end btn btn-primary btn-lg">新增開課課程</a>
+        </p> *@
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Curriculum.FirstOrDefault().Course)
+                    </th>
+                   @*  <th>
+                        @Html.DisplayNameFor(model => model.Curriculum.FirstOrDefault().Dept)
+                    </th> *@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Curriculum.FirstOrDefault().CT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Curriculum.FirstOrDefault().CTHours)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Curriculum)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.CName)
+                        </td>
+                       @*  <td>
+                            @Html.DisplayFor(modelItem => item.Dept.DName)
+                        </td> *@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CT.CTID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CTHours)
+                        </td>
+                        <td class="d-flex justify-content-end">
+                            @* @Html.ActionLink("Edit", "Edit", new { CourseID = item.CourseID, DeptID = item.DeptID, CTID = item.CTID }) | *@
+                            @* @Html.ActionLink("Details", "Details", new { CourseID = item.CourseID, DeptID = item.DeptID, CTID = item.CTID }) | *@
+                            @* @Html.ActionLink("Delete", "Delete", new { CourseID = item.CourseID, DeptID = item.DeptID, CTID = item.CTID }) *@
+                            <form asp-action="Edit">
+                                <input type="hidden" name="deptID" value="@item.DeptID" />
+                                <input type="hidden" name="courseID" value="@item.CourseID" />
+                                <input type="hidden" name="ctID" value="@item.CTID" />
+                                @* <input type="hidden" name="ctID" value="@item.CTHours" /> *@
+                                <input type="submit" value="編輯" class="btn btn-primary"/>
+                            </form>|
+                            <form asp-action="Details">
+                                <input type="hidden" name="deptID" value="@item.DeptID" />
+                                <input type="hidden" name="courseID" value="@item.CourseID" />
+                                <input type="hidden" name="ctID" value="@item.CTID" />
+                                @* <input type="hidden" name="ctID" value="@item.CTHours" /> *@
+                                <input type="submit" value="詳細資料" class="btn btn-success"/>
+                            </form>|
+                            <form asp-action="Delete">
+                                <input type="hidden" name="deptID" value="@item.DeptID" />
+                                <input type="hidden" name="courseID" value="@item.CourseID" />
+                                <input type="hidden" name="ctID" value="@item.CTID" />
+                                <input type="submit" value="刪除" class="btn btn-danger"
+                                       onclick="return confirm('你確定要刪除 @item.Course|@item.DeptID|@item.CTID|@item.CTHours 這筆資料?')" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+</div>
+  
+
